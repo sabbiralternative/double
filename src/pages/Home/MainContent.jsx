@@ -1,3 +1,4 @@
+import Animation from "./Animation";
 import BetSlip from "./BetSlip";
 import History from "./History";
 import NotUsing from "./NotUsing";
@@ -15,7 +16,8 @@ const MainContent = () => {
           backgroundPosition: "center center",
         }}
       >
-        <NotUsing />
+        {/* <NotUsing /> */}
+        <Animation />
         <div
           className="absolute bg-white/10 top-12 left-2 p-2 rounded-full flex items-center gap-2"
           style={{ zIndex: 1000 }}
