@@ -1,8 +1,19 @@
+import { useSelector } from "react-redux";
+import { Settings } from "../../api";
+
 const Header = ({ balance }) => {
+  const { token } = useSelector((state) => state.auth);
+  const handleOpenLobby = () => {
+    const url = `${Settings.lobby}/${token}`;
+    window.location.href = url;
+  };
   return (
     <div className="relative w-full px-2 pt-2 text-center text-white">
       <div className="flex items-center gap-1">
-        <div className="flex items-center gap-1 py-2 pl-2 pr-3 text-xs font-semibold border rounded-full cursor-pointer border-zinc-700">
+        <div
+          onClick={handleOpenLobby}
+          className="flex items-center gap-1 py-2 pl-2 pr-3 text-xs font-semibold border rounded-full cursor-pointer border-zinc-700"
+        >
           <svg
             className="w-4 h-4"
             width={25}

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useCloseModalClickOutside from "../../hooks/closeModal";
 import toast from "react-hot-toast";
-import { useAuth } from "../../hooks/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useOrderMutation } from "../../redux/features/events/events";
 import { playWinSound } from "../../utils/sound";
@@ -11,13 +10,13 @@ import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
 
 const Home = () => {
+  const errorMessage = sessionStorage.getItem("errorMessage");
   const dispatch = useDispatch();
   const recentResult = localStorage.getItem("recentResult");
   const parseRecentResult = recentResult ? JSON.parse(recentResult) : [];
   const [toss, setToss] = useState(null);
   const [addOrder] = useOrderMutation();
   const { token, balance } = useSelector((state) => state.auth);
-  const { mutate: handleAuth } = useAuth();
   const [stake, setStake] = useState(0);
   const [placeBet, setPlaceBet] = useState(false);
   const [totalWin, setTotalWin] = useState(null);
@@ -88,13 +87,7 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      handleAuth();
-    }
-  }, [token, handleAuth]);
-
-  return (
+  return token ? (
     <main className="w-full h-full max-w-xl mx-auto lg:max-w-[1600px] lg:my-auto">
       <main className="w-full h-dvh min-h-dvh">
         <div className="flex flex-col w-full h-full min-h-min xl:justify-center xl:items-center">
@@ -110,6 +103,13 @@ const Home = () => {
         </div>
       </main>
     </main>
+  ) : (
+    <div className="error-container">
+      <div className="alert alert-danger text-center m-0 " role="alert">
+        {errorMessage ||
+          "URL parameters are missing or invalid. Key: token | Value"}
+      </div>
+    </div>
   );
 };
 
