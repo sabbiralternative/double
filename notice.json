@@ -7,7 +7,7 @@
     "settings": {
       "siteTitle": "Double",
       "disabledDevtool": false,
-      "baseUrl": "/double",
+      "baseUrl": "",
       "lobby": "https://aura365.io"
     },
 
