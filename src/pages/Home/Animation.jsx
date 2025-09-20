@@ -46,20 +46,27 @@ const Animation = () => {
 
   return (
     <>
-      <div className="h-[300px] fixed right-[30%] top-[20%] flex items-center justify-center w-[5px] bg-white z-[99999]" />
-
-      <div className="absolute top-[60px] lg:top-[150px] left-0 z-50 w-full overflow-hidden backdrop-blur-sm p-2">
-        <div
-          className="flex w-max whitespace-nowrap gap-3"
-          style={{
-            transform: `translateX(${translateX}px)`,
-          }}
-        >
-          {[...cards, ...cards, ...cards].map((Card, i) => (
-            <div key={i} className="inline-block">
-              {Card}
-            </div>
-          ))}
+      <div className="absolute top-[60px] lg:top-[150px] left-0 z-50 w-full  backdrop-blur-sm p-2 ">
+        <div className="relative flex flex-col justify-center items-center">
+          <div
+            className="h-[120%] lg:h-[140%] absolute  flex items-center justify-center w-[6px]  z-[99999]"
+            style={{
+              backgroundImage:
+                "linear-gradient(to bottom, #272729, white,#272729)",
+            }}
+          />
+          <div
+            className="flex w-max whitespace-nowrap gap-3"
+            style={{
+              transform: `translateX(${translateX}px)`,
+            }}
+          >
+            {[...cards, ...cards, ...cards].map((Card, i) => (
+              <div key={i} className="inline-block">
+                {Card}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
