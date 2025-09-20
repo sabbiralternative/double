@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
 import Animation from "./Animation";
 import BetSlip from "./BetSlip";
 import History from "./History";
-import NotUsing from "./NotUsing";
 
 const MainContent = () => {
+  const [counter, setCounter] = useState(8);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (counter > 0) {
+      setLoading(false);
+      const interval = setInterval(() => {
+        setCounter((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [counter, loading]);
+
   return (
     <div className="lg:w-[60%] w-full lg:h-full flex transition-all xl:max-h-[800px] duration-300 flex-col items-center justify-center lg:py-2 lg:pl-0 px-2 py-1">
       <div
@@ -17,7 +30,12 @@ const MainContent = () => {
         }}
       >
         {/* <NotUsing /> */}
-        <Animation />
+        <Animation
+          loading={loading}
+          counter={counter}
+          setLoading={setLoading}
+          setCounter={setCounter}
+        />
         <div
           className="absolute bg-white/10 top-12 left-2 p-2 rounded-full flex items-center gap-2"
           style={{ zIndex: 1000 }}
@@ -56,19 +74,23 @@ const MainContent = () => {
         </div>
         <History />
         <div className="__className_c0817f flex w-full lg:h-full h-80 flex-col gap-2 justify-center items-center">
-          <div
-            className="text-2xl absolute top-[20%] left-1/2 -translate-x-1/2 font-bold lg:text-4xl -py-2 text-transparent bg-clip-text"
-            style={{
-              backgroundImage:
-                "linear-gradient(to top,white 50%, rgba(255, 255, 255, 0.314) 51%)",
-              backgroundSize: "100% 200%",
-              backgroundPositionY: "80%",
-              opacity: 0,
-              transition: "background-position-y 8s linear",
-            }}
-          >
-            Rolling in 0s
-          </div>
+          {counter > 0 && (
+            <div
+              className="text-2xl absolute top-[13%] left-1/2 -translate-x-1/2 font-bold lg:text-4xl -py-2 text-transparent bg-clip-text"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to top,white 50%, rgba(255, 255, 255, 0.314) 51%)",
+                backgroundSize: "100% 200%",
+                backgroundPositionY: loading ? "90%" : "0%",
+                opacity: 1,
+                transition: "background-position-y 8s linear",
+              }}
+            >
+              Rolling in {counter}s
+            </div>
+          )}
+
+          {/* <div className="text-2xl absolute top-[20%] left-1/2 -translate-x-1/2 font-bold lg:text-4xl -py-2 text-transparent bg-clip-text" style="background-image: linear-gradient(to top, white 50%, rgba(255, 255, 255, 0.314) 51%); background-size: 100% 200%; background-position-y: 0%; opacity: 1; transition: background-position-y 8s linear;">Rolling in 2s</div> */}
           <div
             className="w-full h-full max-w-7xl mx-auto"
             style={{
