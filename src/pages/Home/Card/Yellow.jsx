@@ -1,7 +1,7 @@
 const Yellow = () => {
   return (
     <div className="text-center cursor-pointer slide-in-right font-semibold bg-[#ad7f39] rounded-md">
-      <div className="w-[150px] h-[150px]  rounded-lg p-[4px]">
+      <div className="w-[130px] h-[130px] rounded-lg p-[4px]">
         <svg
           className="p-1 w-full h-full"
           width={199}

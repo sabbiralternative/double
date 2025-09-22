@@ -21,7 +21,7 @@ const MainContent = () => {
     <div className="lg:w-[60%] w-full lg:h-full flex transition-all xl:max-h-[800px] duration-300 flex-col items-center justify-center lg:py-2 lg:pl-0 px-2 py-1">
       <div
         id="game-container"
-        className="relative flex flex-col items-center justify-end w-full h-full overflow-hidden rounded-2xl bg-zinc-800"
+        className="relative flex flex-col items-center justify-start w-full h-full overflow-hidden rounded-2xl bg-zinc-800"
         style={{
           pointerEvents: "auto",
           backgroundImage: 'url("images/bg.webp")',
