@@ -86,7 +86,7 @@ const MainContent = () => {
                 backgroundImage:
                   "linear-gradient(to top,white 50%, rgba(255, 255, 255, 0.314) 51%)",
                 backgroundSize: "100% 200%",
-                backgroundPositionY: loading ? "100%" : "20%",
+                backgroundPositionY: loading ? "90%" : "10%",
                 opacity: 1,
                 transition: "background-position-y 8s linear",
               }}

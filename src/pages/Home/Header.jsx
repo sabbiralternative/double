@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
 import { Settings } from "../../api";
+import { useAuth } from "../../hooks/auth";
 
 const Header = ({ balance }) => {
+  const { mutate: handleAuth } = useAuth();
   const { token } = useSelector((state) => state.auth);
   const handleOpenLobby = () => {
     const url = `${Settings.lobby}/${token}`;
@@ -123,6 +125,7 @@ const Header = ({ balance }) => {
             </span>
           </span>
           <svg
+            onClick={() => handleAuth(token)}
             xmlns="http://www.w3.org/2000/svg"
             width={24}
             height={24}
