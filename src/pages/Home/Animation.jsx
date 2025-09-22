@@ -1,209 +1,8 @@
 import { useEffect, useState } from "react";
-import Green from "./Card/Green";
-import Red from "./Card/Red";
-import Yellow from "./Card/Yellow";
-
-const cards = [
-  {
-    component: <Yellow />,
-    name: "yellow",
-  },
-  {
-    component: <Green />,
-    name: "green",
-  },
-  {
-    component: <Red />,
-    name: "red",
-  },
-  {
-    component: <Yellow />,
-    name: "yellow",
-  },
-  {
-    component: <Green />,
-    name: "green",
-  },
-  {
-    component: <Red />,
-    name: "red",
-  },
-  {
-    component: <Yellow />,
-    name: "yellow",
-  },
-  {
-    component: <Green />,
-    name: "green",
-  },
-  {
-    component: <Red />,
-    name: "red",
-  },
-  {
-    component: <Yellow />,
-    name: "yellow",
-  },
-  {
-    component: <Green />,
-    name: "green",
-  },
-  {
-    component: <Red />,
-    name: "red",
-  },
-];
-
-const moreCards = [
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-  ...cards,
-];
+import { cards } from "./Card";
 
 const Animation = ({ loading, counter, setLoading, setCounter }) => {
+  const [cardName, setCardName] = useState(null);
   const [translateX, setTranslateX] = useState(0);
 
   useEffect(() => {
@@ -211,15 +10,10 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
       setTranslateX(-10000);
 
       const timeout = setTimeout(() => {
-        /* 60 green, red 200, yellow 80 */
-        const numbers = [-60, -200, 80];
-        const randomCardPosition =
-          numbers[Math.floor(Math.random() * numbers.length)];
-        const element = document.querySelector(".animation-container");
-        element.style.transition = "none";
-        setTranslateX(randomCardPosition);
-        element.offsetHeight; // trigger reflow
-        element.style.transition = "transform 5s";
+        const cards = ["green", "red", "yellow"];
+        const randomCard = cards[Math.floor(Math.random() * cards.length)];
+        setCardName(randomCard);
+        setTranslateX(0);
 
         setTimeout(() => {
           setLoading(true);
@@ -232,6 +26,13 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
       };
     }
   }, [counter, setLoading, setCounter]);
+
+  const style =
+    cardName === "green"
+      ? "+ 50% - 68px"
+      : cardName === "red"
+      ? "+ 50% - 68px - 140px"
+      : "+ 50% - 68px - 140px - 140px";
 
   return (
     <>
@@ -247,13 +48,16 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
           <div
             className="flex w-full whitespace-nowrap gap-x-3 items-center justify-start py-5 lg:py-0 animation-container"
             style={{
-              transform: loading ? "none" : `translateX(${translateX}px)`,
+              transform: loading
+                ? "none"
+                : cardName
+                ? `translateX(calc(${translateX}px ${style}))`
+                : `translateX(${translateX}px)`,
               transitionProperty: "transform",
               transitionDuration: "5s",
-              // transitionTimingFunction: "ease-in-out",
             }}
           >
-            {moreCards.map((Card, i) => (
+            {cards.map((Card, i) => (
               <div key={i} className="inline-block">
                 {Card.component}
               </div>

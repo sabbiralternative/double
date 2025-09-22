@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Animation from "./Animation";
 import BetSlip from "./BetSlip";
 import History from "./History";
 
 const MainContent = () => {
+  const ref = useRef();
   const [counter, setCounter] = useState(8);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +19,10 @@ const MainContent = () => {
   }, [counter, loading]);
 
   return (
-    <div className="lg:w-[60%] w-full lg:h-full flex transition-all xl:max-h-[800px] duration-300 flex-col items-center justify-center lg:py-2 lg:pl-0 px-2 py-1">
+    <div
+      ref={ref}
+      className="lg:w-[60%] w-full lg:h-full flex transition-all xl:max-h-[800px] duration-300 flex-col items-center justify-center lg:py-2 lg:pl-0 px-2 py-1"
+    >
       <div
         id="game-container"
         className="relative flex flex-col items-center justify-start w-full h-full overflow-hidden rounded-2xl bg-zinc-800"
@@ -31,6 +35,7 @@ const MainContent = () => {
       >
         {/* <NotUsing /> */}
         <Animation
+          innerWidth={ref.current?.clientWidth}
           loading={loading}
           counter={counter}
           setLoading={setLoading}
@@ -81,7 +86,7 @@ const MainContent = () => {
                 backgroundImage:
                   "linear-gradient(to top,white 50%, rgba(255, 255, 255, 0.314) 51%)",
                 backgroundSize: "100% 200%",
-                backgroundPositionY: loading ? "90%" : "0%",
+                backgroundPositionY: loading ? "100%" : "20%",
                 opacity: 1,
                 transition: "background-position-y 8s linear",
               }}
