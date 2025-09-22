@@ -204,7 +204,7 @@ const moreCards = [
 ];
 
 const Animation = ({ loading, counter, setLoading, setCounter }) => {
-  const [translateX, setTranslateX] = useState(120);
+  const [translateX, setTranslateX] = useState(0);
 
   const CARD_WIDTH_WITH_GAP = 142;
 
@@ -213,26 +213,26 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
       const totalCards = moreCards.length;
       const randomStopIndex = Math.floor(Math.random() * totalCards);
       const randomFinalTranslate = randomStopIndex * CARD_WIDTH_WITH_GAP;
-      const cardAtIndex = moreCards[randomStopIndex];
-      const cardType = cardAtIndex.name;
+      // const cardAtIndex = moreCards[randomStopIndex];
+      // const cardType = cardAtIndex.name;
 
       // Find the first card of the same type
-      const firstCardOfTypeIndex = moreCards.findIndex(
-        (card) => card.name === cardType
-      );
+      // const firstCardOfTypeIndex = moreCards.findIndex(
+      //   (card) => card.name === cardType
+      // );
 
-      // Calculate final translate to center the first card of the same type
-      const finalTranslate =
-        firstCardOfTypeIndex !== -1
-          ? firstCardOfTypeIndex * CARD_WIDTH_WITH_GAP
-          : randomFinalTranslate;
+      // // Calculate final translate to center the first card of the same type
+      // const finalTranslate =
+      //   firstCardOfTypeIndex !== -1
+      //     ? firstCardOfTypeIndex * CARD_WIDTH_WITH_GAP
+      //     : randomFinalTranslate;
 
       // First move to random position (where any card will be centered)
-      setTranslateX(randomFinalTranslate);
+      setTranslateX(-randomFinalTranslate);
 
       const timeout = setTimeout(() => {
         /* 60 green, red 200, yellow 343 */
-        const numbers = [60, 200, 342];
+        const numbers = [80, -80, 243];
         const randomCardPosition =
           numbers[Math.floor(Math.random() * numbers.length)];
         setTranslateX(randomCardPosition);
@@ -241,14 +241,14 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
           setLoading(true);
           setCounter(8);
         }, 6000);
-      }, 6000);
+      }, 3000);
 
       return () => {
         clearTimeout(timeout);
       };
     }
   }, [counter, setLoading, setCounter]);
-
+  console.log({ translateX });
   return (
     <>
       <div className="absolute top-[60px] lg:top-[150px] left-0 z-50 w-full backdrop-blur-sm p-2">
@@ -263,7 +263,7 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
           <div
             className="flex w-full whitespace-nowrap gap-x-3 items-center justify-start py-5 lg:py-0"
             style={{
-              transform: loading ? "none" : `translateX(-${translateX}px)`,
+              transform: loading ? "none" : `translateX(${translateX}px)`,
               transitionProperty: "transform",
               transitionDuration: "5s",
               transitionTimingFunction: "ease-in-out",
