@@ -36,17 +36,17 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
 
   return (
     <>
-      <div className="absolute top-[60px] lg:top-[150px] left-0 z-50 w-full backdrop-blur-sm p-2">
+      <div className="absolute top-[65px] lg:top-[150px] left-0 z-50 w-full backdrop-blur-sm p-2">
         <div className="relative flex flex-col justify-center items-center">
           <div
-            className="h-[120%] lg:h-[140%] absolute flex items-center justify-center w-[6px] z-[99999]"
+            className="h-[105%] lg:h-[140%] absolute flex items-center justify-center w-[6px] z-[99999]"
             style={{
               backgroundImage:
                 "linear-gradient(to bottom, #272729, white,#272729)",
             }}
           />
           <div
-            className="flex w-full whitespace-nowrap gap-x-3 items-center justify-start py-5 lg:py-0 animation-container"
+            className="flex w-full whitespace-nowrap gap-x-3 items-center justify-start py-3.5 lg:py-0 animation-container"
             style={{
               transform: loading
                 ? "none"
