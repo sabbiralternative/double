@@ -228,11 +228,11 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
       //     : randomFinalTranslate;
 
       // First move to random position (where any card will be centered)
-      setTranslateX(-randomFinalTranslate);
+      setTranslateX(randomFinalTranslate);
 
       const timeout = setTimeout(() => {
         /* 60 green, red 200, yellow 343 */
-        const numbers = [80, -80, 243];
+        const numbers = [60, 200, 343];
         const randomCardPosition =
           numbers[Math.floor(Math.random() * numbers.length)];
         setTranslateX(randomCardPosition);
@@ -263,7 +263,7 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
           <div
             className="flex w-full whitespace-nowrap gap-x-3 items-center justify-start py-5 lg:py-0"
             style={{
-              transform: loading ? "none" : `translateX(${translateX}px)`,
+              transform: loading ? "none" : `translateX(-${translateX}px)`,
               transitionProperty: "transform",
               transitionDuration: "5s",
               transitionTimingFunction: "ease-in-out",
