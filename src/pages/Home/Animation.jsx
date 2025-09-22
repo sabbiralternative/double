@@ -206,29 +206,9 @@ const moreCards = [
 const Animation = ({ loading, counter, setLoading, setCounter }) => {
   const [translateX, setTranslateX] = useState(0);
 
-  const CARD_WIDTH_WITH_GAP = 142;
-
   useEffect(() => {
     if (counter === 0) {
-      const totalCards = moreCards.length;
-      const randomStopIndex = Math.floor(Math.random() * totalCards);
-      const randomFinalTranslate = randomStopIndex * CARD_WIDTH_WITH_GAP;
-      // const cardAtIndex = moreCards[randomStopIndex];
-      // const cardType = cardAtIndex.name;
-
-      // Find the first card of the same type
-      // const firstCardOfTypeIndex = moreCards.findIndex(
-      //   (card) => card.name === cardType
-      // );
-
-      // // Calculate final translate to center the first card of the same type
-      // const finalTranslate =
-      //   firstCardOfTypeIndex !== -1
-      //     ? firstCardOfTypeIndex * CARD_WIDTH_WITH_GAP
-      //     : randomFinalTranslate;
-
-      // First move to random position (where any card will be centered)
-      setTranslateX(randomFinalTranslate);
+      setTranslateX(10000);
 
       const timeout = setTimeout(() => {
         /* 60 green, red 200, yellow 343 */
@@ -248,7 +228,7 @@ const Animation = ({ loading, counter, setLoading, setCounter }) => {
       };
     }
   }, [counter, setLoading, setCounter]);
-  console.log({ translateX });
+
   return (
     <>
       <div className="absolute top-[60px] lg:top-[150px] left-0 z-50 w-full backdrop-blur-sm p-2">
